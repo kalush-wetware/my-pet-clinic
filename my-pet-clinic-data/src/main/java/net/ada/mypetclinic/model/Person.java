@@ -1,7 +1,7 @@
 package net.ada.mypetclinic.model;
 
+public class Person extends BaseEntity {
 
-public class Person {
     private String firstName;
     private String lastName;
 
@@ -20,7 +20,5 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    
-    
+
 }

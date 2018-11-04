@@ -2,8 +2,8 @@ package net.ada.mypetclinic.model;
 
 import java.time.LocalDate;
 
+public class Pet extends BaseEntity {
 
-public class Pet {
     private PetType petType;
     private Owner owner;
     private LocalDate birthDate;
@@ -31,6 +31,5 @@ public class Pet {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-    
-    
+
 }

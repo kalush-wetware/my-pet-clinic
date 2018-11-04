@@ -1,7 +1,7 @@
 package net.ada.mypetclinic.model;
 
+public class PetType extends BaseEntity {
 
-public class PetType {
     private String name;
 
     public String getName() {
@@ -11,6 +11,5 @@ public class PetType {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }
