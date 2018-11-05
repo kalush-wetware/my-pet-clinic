@@ -3,13 +3,7 @@ package net.ada.mypetclinic.services;
 import java.util.Set;
 import net.ada.mypetclinic.model.Owner;
 
-public interface OwnerService {
+public interface OwnerService extends CrudService<Owner, Long>{
 
-    Owner findByLastName(String lastName);
-    
-    Owner findById(Long id);
-
-    Owner save(Owner owner);
-
-    Set<Owner> findAll();
+    Owner findByLastName(String lastName);      
 }
