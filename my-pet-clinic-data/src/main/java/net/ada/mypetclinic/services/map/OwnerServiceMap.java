@@ -2,10 +2,10 @@ package net.ada.mypetclinic.services.map;
 
 import java.util.Set;
 import net.ada.mypetclinic.model.Owner;
-import net.ada.mypetclinic.services.CrudService;
+import net.ada.mypetclinic.services.OwnerService;
 
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long>{
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService{
 
     @Override
     public void delete(Owner object) {
@@ -36,6 +36,11 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     public Owner save(Owner object) {
         super.save(object.getId(), object);
         return object;
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 
    

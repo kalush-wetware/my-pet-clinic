@@ -3,9 +3,10 @@ package net.ada.mypetclinic.services.map;
 import java.util.Set;
 import net.ada.mypetclinic.model.Vet;
 import net.ada.mypetclinic.services.CrudService;
+import net.ada.mypetclinic.services.VetService;
 
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long>{
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService{
 
     @Override
     public void delete(Vet object) {
