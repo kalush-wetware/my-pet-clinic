@@ -4,8 +4,9 @@ import java.util.Set;
 import net.ada.mypetclinic.model.Pet;
 import net.ada.mypetclinic.services.CrudService;
 import net.ada.mypetclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService{
 
     @Override
