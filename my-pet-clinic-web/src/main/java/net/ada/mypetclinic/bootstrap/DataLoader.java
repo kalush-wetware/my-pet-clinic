@@ -1,6 +1,8 @@
 package net.ada.mypetclinic.bootstrap;
 
+import java.time.LocalDate;
 import net.ada.mypetclinic.model.Owner;
+import net.ada.mypetclinic.model.Pet;
 import net.ada.mypetclinic.model.PetType;
 import net.ada.mypetclinic.model.Vet;
 import net.ada.mypetclinic.services.OwnerService;
@@ -37,13 +39,33 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
+        owner1.setAddress("London Street");
+        owner1.setCity("London");
+        owner1.setTeleophone("112-2234");
+        
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Rosco");
+        owner1.getPets().add(mikesPet);
 
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("London Street");
+        owner2.setCity("London");
+        owner2.setTeleophone("112");
 
+        Pet fionasPet = new Pet();
+        fionasPet.setPetType(savedCatPetType);
+        fionasPet.setOwner(owner2);
+        fionasPet.setBirthDate(LocalDate.now());
+        fionasPet.setName("Slyvester");
+        owner2.getPets().add(fionasPet);
+        
         ownerService.save(owner2);
         
         System.out.println("Loaded Owners....");
