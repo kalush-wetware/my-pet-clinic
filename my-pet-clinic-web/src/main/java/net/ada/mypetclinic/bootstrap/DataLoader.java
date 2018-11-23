@@ -1,8 +1,10 @@
 package net.ada.mypetclinic.bootstrap;
 
 import net.ada.mypetclinic.model.Owner;
+import net.ada.mypetclinic.model.PetType;
 import net.ada.mypetclinic.model.Vet;
 import net.ada.mypetclinic.services.OwnerService;
+import net.ada.mypetclinic.services.PetTypeService;
 import net.ada.mypetclinic.services.VetService;
 import net.ada.mypetclinic.services.map.OwnerServiceMap;
 import net.ada.mypetclinic.services.map.VetServiceMap;
@@ -14,14 +16,24 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
-   
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    private final PetTypeService petTypeService;
+     
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
-    public void run(String... args) throws Exception {         
+    public void run(String... args) throws Exception {    
+        PetType dog = new PetType();
+        dog.setName("Dog");
+        PetType savedDogPetType = petTypeService.save(dog);
+        
+        PetType cat = new PetType();
+        cat.setName("Cat");
+        PetType savedCatPetType = petTypeService.save(cat);
+                
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
