@@ -2,11 +2,11 @@ package net.ada.mypetclinic.services.map;
 
 import java.util.Set;
 import net.ada.mypetclinic.model.Speciality;
-import net.ada.mypetclinic.services.SpecialitiesService;
 import org.springframework.stereotype.Service;
+import net.ada.mypetclinic.services.SpecialityService;
 
 @Service
-public class SpecialitiesServiceMap extends AbstractMapService<Speciality, Long> implements SpecialitiesService{
+public class SpecialitiesServiceMap extends AbstractMapService<Speciality, Long> implements SpecialityService{
 
     @Override
     public void delete(Speciality object) {
