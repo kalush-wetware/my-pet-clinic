@@ -7,7 +7,7 @@ import net.ada.mypetclinic.services.PetService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService{
+public class PetMapService extends AbstractMapService<Pet, Long> implements PetService{
 
     @Override
     public void delete(Pet object) {
