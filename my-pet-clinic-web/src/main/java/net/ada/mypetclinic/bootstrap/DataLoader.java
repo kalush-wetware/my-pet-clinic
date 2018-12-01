@@ -6,13 +6,14 @@ import net.ada.mypetclinic.model.Pet;
 import net.ada.mypetclinic.model.PetType;
 import net.ada.mypetclinic.model.Speciality;
 import net.ada.mypetclinic.model.Vet;
+import net.ada.mypetclinic.model.Visit;
 import net.ada.mypetclinic.services.OwnerService;
-import net.ada.mypetclinic.services.PetService;
 import net.ada.mypetclinic.services.PetTypeService;
 import net.ada.mypetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import net.ada.mypetclinic.services.SpecialityService;
+import net.ada.mypetclinic.services.VisitService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -21,12 +22,16 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService,
+            PetTypeService petTypeService, SpecialityService specialityService,
+            VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -91,6 +96,12 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(fionasPet);
 
         ownerService.save(owner2);
+        
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy cat...");
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners....");
 
