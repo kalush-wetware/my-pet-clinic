@@ -3,9 +3,11 @@ package net.ada.mypetclinic.services.map;
 import java.util.Set;
 import net.ada.mypetclinic.model.Visit;
 import net.ada.mypetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({"default", "map"})
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService{
 
     @Override
