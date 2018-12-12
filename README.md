@@ -1,1 +1,1 @@
-# my-pet-clinic
+[![CircleCI](https://circleci.com/gh/kalush-wetware/my-pet-clinic.svg?style=svg)](https://circleci.com/gh/kalush-wetware/my-pet-clinic)
