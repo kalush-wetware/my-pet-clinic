@@ -57,16 +57,7 @@ public class OwnerControllerTest {
                 .andExpect(model().attribute("owners", Matchers.hasSize(2)));
 
     }
-
-    @Test
-    public void testFindOwners() throws Exception {
-        mockMvc.perform(get("/owners/find"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("notimplemented"));
-
-        Mockito.verifyZeroInteractions(ownerService);
-    }
-
+    
     @Test
     public void displayOwner() throws Exception {
         when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
