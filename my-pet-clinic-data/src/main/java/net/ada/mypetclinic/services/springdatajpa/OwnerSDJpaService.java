@@ -1,6 +1,7 @@
 package net.ada.mypetclinic.services.springdatajpa;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import net.ada.mypetclinic.model.Owner;
 import net.ada.mypetclinic.repositories.OwnerRepository;
@@ -12,19 +13,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile("springdatajpa")
-public class OwnerSDJpaService implements OwnerService{
-    
+public class OwnerSDJpaService implements OwnerService {
+
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
 
-    public OwnerSDJpaService(OwnerRepository ownerRepository, 
+    public OwnerSDJpaService(OwnerRepository ownerRepository,
             PetRepository petRepository, PetTypeRepository petTypeRepository) {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
         this.petTypeRepository = petTypeRepository;
     }
-       
 
     @Override
     public Owner findByLastName(String lastName) {
@@ -56,6 +56,11 @@ public class OwnerSDJpaService implements OwnerService{
     @Override
     public void deleteById(Long id) {
         ownerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Owner> findAllByLastNameLike(String lastName) {
+        return ownerRepository.findAllByLastNameLike(lastName);
     }
 
 }
