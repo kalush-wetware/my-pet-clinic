@@ -1,6 +1,8 @@
 package net.ada.mypetclinic.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import javax.validation.Valid;
 import net.ada.mypetclinic.model.Owner;
 import net.ada.mypetclinic.model.Pet;
@@ -8,6 +10,7 @@ import net.ada.mypetclinic.model.PetType;
 import net.ada.mypetclinic.services.OwnerService;
 import net.ada.mypetclinic.services.PetService;
 import net.ada.mypetclinic.services.PetTypeService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/owners/{ownerId}")
 public class PetController {
-    
+
     private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
     private final PetService petService;
@@ -51,8 +54,8 @@ public class PetController {
     public void initOwnerBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
     }
-    
-     @GetMapping("/pets/new")
+
+    @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, Model model) {
         Pet pet = new Pet();
         owner.getPets().add(pet);
@@ -63,7 +66,7 @@ public class PetController {
 
     @PostMapping("/pets/new")
     public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
-        if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null){
+        if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
             result.rejectValue("name", "duplicate", "already exists");
         }
         owner.getPets().add(pet);
@@ -76,8 +79,8 @@ public class PetController {
             return "redirect:/owners/" + owner.getId();
         }
     }
-    
-     @GetMapping("/pets/{petId}/edit")
+
+    @GetMapping("/pets/{petId}/edit")
     public String initUpdateForm(@PathVariable Long petId, Model model) {
         model.addAttribute("pet", petService.findById(petId));
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
@@ -94,6 +97,21 @@ public class PetController {
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }
+    }
+
+    @ModelAttribute("dateFormat")
+    public String dateFormat() {
+        return "yyyy-MM-dd";
+    }
+
+    @InitBinder
+    private void dateBinder(WebDataBinder binder) {
+        //The date format to parse or output your dates
+        SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormat());
+        //Create a new CustomDateEditor
+        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+        //Register it as custom editor for the Date type
+        binder.registerCustomEditor(Date.class, editor);
     }
 
 }
